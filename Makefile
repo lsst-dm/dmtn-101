@@ -13,7 +13,7 @@ export TEXMFHOME = lsst-texmf/texmf
 
 $(DOCNAME).pdf: $(DOCNAME).tex meta.tex
 	xelatex $(DOCNAME)
-#	bibtex $(DOCNAME)
+	bibtex $(DOCNAME)
 	xelatex $(DOCNAME)
 	xelatex $(DOCNAME)
 
