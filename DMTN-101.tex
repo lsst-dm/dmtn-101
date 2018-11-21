@@ -71,7 +71,7 @@ science rafts.
 slightly different set of ISR stages than are listed here.
 \end{itemize}
 
-The sections labelled \emph{WRITE ME} have been copied from my other calibration documents, so need to 
+The sections labelled \emph{WRITE ME} have been copied from my other calibration documents, so need to
 be changed from an algorithmic description to a V\&V plan.
 
 \section{Defect Maps}
@@ -193,18 +193,18 @@ well known; both the flux level and shutter time must be well measured.  If nece
 in the dark, turn on the light source, turn it off, and then close the shutter.  N.b. It may be necessary to
 modify or augment this set of intensity levels to successfully carry out the specified tests.
 
-An alternative dataset it taken by opening the shutter, and using the CBP with a mask with reasonably large 
+An alternative dataset it taken by opening the shutter, and using the CBP with a mask with reasonably large
 holes to produce spots on the focal plane at the same set of intensity levels as above, with at least one
 spot on every amplifier.  After every exposure, the parallels on the CCD must be run to transfer enough rows
 that the successive spots do not overlap.  The sequence shuld be repeated with the spots moved to different points on the
 amplifier.  If necessary, this test can be carried out using masks with fewer holes by repeating the scans
-with the CBP rotated about its pupil to move the spots.  
+with the CBP rotated about its pupil to move the spots.
 
 The individual frames will be processed through overscan, bias, dark, and flatfield ISR processing.
 
 Tests:
 \begin{enumerate}
-\item For each flat exposure, divide by the (known) product of intensity and exposure time. 
+\item For each flat exposure, divide by the (known) product of intensity and exposure time.
 For each amplifier calculate the median intensity, and fit a suitable functional form
 to measure the non-linearity.
 \item Analyse these non-linear curves to determine the point at which the data cannot be reliably
@@ -232,7 +232,7 @@ amplifier.  If convenient, the parallels on the CCD may be run to transfer enoug
 spots do not overlap to reduce the total data volume.
 
 The individual frames will be processed through overscan, bias, dark, non-linearity, flatfield,
-brighter-fatter, and CTE (if available) ISR processing. 
+brighter-fatter, and CTE (if available) ISR processing.
 
 Tests:
 \begin{enumerate}
@@ -518,7 +518,7 @@ makes the surprising claim that they can find $\xib$ by looking for a solution c
 If such approaches fail, it may be possible to measure $\xib$ by using images of 1-D sinusoids projected
 onto the CCD, either by the camera team or on the mountain using the CBP.
 
-See \secRef{correctingPixelSizes} 
+See \secRef{correctingPixelSizes}
 for a discussion of how we will use $\xib$ once it is known;
 \outputData{pixelSizeMap}.
 
