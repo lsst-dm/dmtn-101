@@ -37,9 +37,8 @@ A description of plans for verifying LSST's Calibration Data Products. This docu
 
 \maketitle
 
-\renewcommand{\secRef}[1]{Sec. #1}
+\renewcommand{\secRef}[1]{Sec. \ref{#1}}
 \section{Text from LVV-57}
-\label{sec-1}
 Specification: The DMS shall produce and archive Calibration Data Products that capture the signature of the
 telescope, camera and detector, including at least: Crosstalk correction matrix, Bias and Dark correction
 frames, a set of monochromatic dome flats spanning the wavelength range, a synthetic broad-band flat per
@@ -49,7 +48,6 @@ For every calibration mode, prove that the data can be processed. Can be done wi
 from the auxiliary telescope. Will need to be redone with real LSST camera data.
 
 \section{Introduction}
-\label{sec-2}
 
 In some cases the data taken for one purpose may be reused for another, but I have made no attempt to
 capture this here.
@@ -77,7 +75,6 @@ The sections labelled \emph{WRITE ME} have been copied from my other calibration
 be changed from an algorithmic description to a V\&V plan.
 
 \section{Defect Maps}
-\label{sec-3}
 
 We expect the camera team to deliver a list of bad (i.e. ones that are unusable) and suspect (i.e.
 ones that should raise a flag during processing) pixels.
@@ -117,7 +114,6 @@ the defect map.  Identify pixels in the defect map that are not found
 \end{enumerate}
 
 \section{Biases}
-\label{sec-4}
 
 Bias frames will be produced by taking the median of N$_{\text{b}}$ (nominally 20) bias exposures.
 
@@ -138,7 +134,6 @@ consistent with the 5-sigma clipped value.
 \end{enumerate}
 
 \section{Dark Current}
-\label{sec-5}
 
 Dark frames will be produced by taking the median of N$_{\text{d}}$ (nominally 100) dark exposures, each of length T$_{\text{d}}$
 (nominally 30s), giving a total exposure of c. 3000s.
@@ -172,7 +167,6 @@ consistent (allowing for the slightly increased readnoise), use the smaller set 
 generation of dark frames.
 
 \section{Monitor Amplifier Gains}
-\label{sec-6}
 
 We are unable to measure the gain as accurately as with Fe55 measurements, but we can check the relative
 gain sensitivity between the 16 amplifiers in a CCD and make rough measurements of the absolute gain. Note
@@ -189,7 +183,6 @@ that this is sensitive to brighter-fatter so bin (or use BF correction code).
 \end{enumerate}
 
 \section{Non-linearity}
-\label{sec-7}
 
 We expect the camera team to deliver non-linearity curves for every amplifier, and also the level above which
 these non-linearity curves may be unreliable.
@@ -225,7 +218,6 @@ linearised.
 \end{enumerate}
 
 \section{Saturation Levels}
-\label{sec-8}
 
 We expect the camera team to provide, for each amplifier, the lowest charge level at which charge moves from
 one pixel to a neighbour.  If necessary, they will also provide the level at which the serial register
@@ -261,7 +253,6 @@ register) for signs of saturation in the serial register.
 \end{enumerate}
 
 \section{Crosstalk}
-\label{sec-9}
 
 We expect the camera team to deliver a crosstalk matrix coupling every amplifier to every other amplifier; we
 hope and expect that most of these matrix elements will be 0.  It is currently expected that crosstalk between
@@ -302,7 +293,6 @@ We can can also check the cross talk coefficients using saturated stars' bleed t
 2012PASP..124.1347Y)
 
 \section{WRITE ME Flat Fields}
-\label{sec-10}
 
 Even with high-QE devices such as those in the LSST camera, the sensitivity of the detectors is a function of
 the SED of the light illuminating them (especially in the uv and above c. 950nm); this is made worse by any
@@ -317,7 +307,6 @@ We are considering applying corrections to the data for the static part of the p
 \emph{very} important that the same corrections be applied to the flat fields.
 
 \subsection{Broadband and Monochromatic Flats}
-\label{sec-10-1}
 
 We will take both broadband \emph{broadFlat} and \emph{monochromatic} flat fields.  As discussed below, we will use the
 latter to estimate the correct flat field for light with any desired SED (including that of the night sky),
@@ -325,7 +314,6 @@ and the former to correct our data for the effects of dust on the filters and ot
 short time scale.
 
 \subsection{Contamination of Filters and Other Optical Elements}
-\label{sec-10-2}
 
 Dust motes appearing on filters have an affect upon the system flat fields.  This is not expected to be
 a serious effect for LSST as the beam at the filter has a diameter of c. 10cm (effective diameter c. 8cm)
@@ -342,7 +330,7 @@ as the reference image.  We will do both;  any discrepancy will be a sign of pot
 drift in the filter curves.
 
 \subsection{Flats for Background Estimation}
-\label{sec-10-3}
+\label{backgroundFlats}
 
 The calibration system will produce a low-resolution spectrum of the night sky,
 and we will use this to synthesise a flat field image for the sky's SED from the monochromatic dome flats.
@@ -357,7 +345,6 @@ Note that we are not proposing using twilight or nighttime sky flats as they do 
 SED and may cause extra problems due to polarization.
 
 \subsection{Flats for Photometry}
-\label{sec-10-4}
 
 The flat fields described in \secRef{backgroundFlats} are not suitable for photometry of astronomical
 objects for at least two reasons;  they include indirect light, and they have the wrong SED.  We can
@@ -422,7 +409,6 @@ We do not need this information to calibrate LSST, but it will provide a valuabl
 will inform the camera and telescope teams about the state of the optical elements.
 
 \subsection{Outputs}
-\label{sec-10-5}
 
 The corrected monochromatic flats (appropriate for the background and photometry) will be the inputs to
 pipeline processing; \outputDataII{monoFlat}{monoPhotoFlat}.
@@ -443,7 +429,6 @@ SNe), we will prepare a low-resolution data cube to capture the essence of \outp
 \end{itemize}
 
 \section{WRITE ME Fringe Correction}
-\label{sec-11}
 
 Although the thick, deep-depletion LSST CCDs reduce the amplitude of fringing they do not remove the necessity
 to handle it correctly in the z and y bands.  Fringing is a QE effect, and this QE variation coupled to night
@@ -489,7 +474,6 @@ If this sky-flattening approach works we will not need any special fringe output
 allow for the use of some variant of fringe frames as a backup \outputData{fringeFrames}.
 
 \section{WRITE ME Filter Transmission Curves}
-\label{sec-12}
 
 The filter transmission curves \inputData{filterTransmission} will be provided by the camera team, but by
 using monochromatic spots from the CBP with \inputDataII{CBP:filter}{CBP:leak} and without filters in the beam
@@ -505,7 +489,7 @@ to \c 6 exposures per wavelength step; an extension of \inputData{CBP:M1} to hig
 with the filter in the beam.
 
 \section{WRITE ME Pixel Size Effects}
-\label{sec-13}
+\label{correctingPixelSizes}
 
 It has become clear that much of the pixel-to-pixel variation seen in flat field images is
 in fact due to variations in the sizes of the pixels.  These are popularily divided into two
@@ -539,7 +523,6 @@ for a discussion of how we will use $\xib$ once it is known;
 \outputData{pixelSizeMap}.
 
 \section{WRITE ME Brighter-Fatter}
-\label{sec-14}
 
 The measurements needed to characterise Brighter-Fatter effects are not yet clear.  Current state of the art
 is to use pixel-to-pixel correlations in flat fields taken at different flux levels \inputData{broadFlat}.  It
@@ -547,7 +530,6 @@ is possible that we'll need other measurements, possibly generated by projecting
 the CBP;  \outputData{brighterFatterCoeffs}.
 
 \section{WRITE ME Ghosts and Ghouls}
-\label{sec-15}
 
 Write me
 
