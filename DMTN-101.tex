@@ -496,7 +496,7 @@ in fact due to variations in the sizes of the pixels.  These are popularily divi
 parts:
 \begin{itemize}
 \item Large scale features such as the ``tree-rings'' due to variation in the properties of the
-  silicon, or perturbations in the electric field (\eg ``glowing edges'').
+	silicon, or perturbations in the electric field (\eg ``edge distrotions`` [also known as ``glowing edges'' in certain devices]).
 \item Small-scale, quasi-random, variations in the pixel sizes.
 \end{itemize}
 
@@ -532,6 +532,20 @@ the CBP;  \outputData{brighterFatterCoeffs}.
 \section{WRITE ME Ghosts and Ghouls}
 
 Write me
+
+
+\section{Photon Transfer Curve}
+The Photon Transfer Curve (PTC) of a CCD plots the variance of an image taken under uniform illumination (``flat fields``) as a function of their average. It allows for the calculation of fundamental CCD parameters such as the gain (electrons per ADU), the reasout noise, and the mean pixel full well via the PTC turnoff. As such, it plays an important role in the characterization and monitoring of the state of a detector. 
+
+It has been stablished that the variance flattens out at high fluxes and it is not perfectly proportional to the average flux, as Poissonian statistics would dictate. This is related to the ``Brighter-fatter`` effect and increases the correlations between adjacent pixels, decaying with distance, as reported in e.g., Astier et al. 2019. This study proposes a couple of models to fit to the PTC data (including covariances) with a leading order parameter to take the BFE into account. This parameter should be negative (as it describes the change in a pixel area due to its own charge content), is purely electrostatic in nature, and should not change during the life of a given CCD unless operating volategs such as the bias voltage are changed.  
+
+Tests: 
+\begin{enumerate}
+\item Compare the fitted gain to the gain value stored in each amplifier, to monitor any temporal changes. Check that the relative fractional difference is within a threshold (default: 5\%).
+\item Compare the fitted readout noise to the readout noise value stored in each amplifier, to monitor any temporal changes. Check that the relative fractional difference is within a threshold (default: 5\%).
+\item Check that the reported PTC turnoff value (converted to electrons) is greater or equal than the full-well requirement (90000 electrons).
+\item Check that the brither-fatter effect parameter from the Astier et al. 2019 models, $a00$, is within a range determined by measurements of the distribution of this parameter (e.g., within five sigma of the mean of the coefficientis distribution for a given instrument, detector, and fit type).  
+\end{enumerate}
 
 \appendix
 
