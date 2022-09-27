@@ -29,6 +29,8 @@ A description of plans for verifying LSST's Calibration Data Products. This docu
 \setDocChangeRecord{%
   \addtohist{1}{YYYY-MM-DD}{Unreleased.}{Robert Lupton}
   \addtohist{1.1}{2022-08-05}{Added PTC section}{Andrés A. Plazas Malagón}
+  \addtohist{1.2}{2022-09-27}{Added gain test: 6.2}{Andrés A. Plazas Malagón}
+  \addtohist{1.2.0}{2022-09-27}{Replace ``master" with ``combined" and ``aggressor" with ``source".}{Andrés A. Plazas Malagón}
 }
 
 \begin{document}
@@ -180,7 +182,7 @@ Tests:
 \begin{enumerate}
 \item Form the function (I$_{\text{1}}$ - I$_{\text{2}}$)/(I$_{\text{1}}$ + I$_{\text{2}}$) whose mean value is 1/gain.  Note
 that this is sensitive to brighter-fatter so bin (or use BF correction code).
-\item Compare the gain estimated form a pair of flat fields to the gain value stored in each amplifier, to monitor any temporal changes. Check that the relative fractional difference is within a threshold (default: 5\%).
+\item Compare the gain estimated from a pair of flat fields to the gain value stored in each amplifier, to monitor any temporal changes. Check that the relative fractional difference is within a threshold (default: 5\%).
 \item Measure the gain values for each amplifier that minimises discontinuities at amp boundaries.
 \end{enumerate}
 
