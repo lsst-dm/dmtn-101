@@ -29,6 +29,8 @@ A description of plans for verifying LSST's Calibration Data Products. This docu
 \setDocChangeRecord{%
   \addtohist{1}{YYYY-MM-DD}{Unreleased.}{Robert Lupton}
   \addtohist{1.1}{2022-08-05}{Added PTC section}{Andrés A. Plazas Malagón}
+  \addtohist{1.2}{2022-09-27}{Added gain test: 6.2}{Andrés A. Plazas Malagón}
+  \addtohist{1.2.0}{2022-09-27}{Replace ``master" with ``combined" and ``aggressor" with ``source".}{Andrés A. Plazas Malagón}
 }
 
 \begin{document}
@@ -94,20 +96,20 @@ less than 1\%).  Also take 3 pocket-pumped flats at each level.
 
 The individual frames will be run through full ISR processing (including cosmic ray removal using an N(0,1)
 Gaussian PSF).  The flat field used should be appropriate to correcting surface brightness not QE. Combine
-using a median or 5-sigma-clip to make a "master" frame; the combination may be done using standard LSST image
-stacking code.  The pocket-pumped data should not be included in the master frames, but should be median-
+using a median or 5-sigma-clip to make a "combined" frame; the combination may be done using standard LSST image
+stacking code.  The pocket-pumped data should not be included in the combined frames, but should be median-
 combined separately.
 
 N.b. Defect interpolation should be disabled in this processing.
 
 Tests:
 \begin{enumerate}
-\item Divide each resulting master frame by its median.
-\item For each master frame, confirm that the median level is 1.0 to within statistical noise
+\item Divide each resulting combined frame by its median.
+\item For each combined frame, confirm that the median level is 1.0 to within statistical noise
 (after masking known defects)
-\item For each master frame, divide by the standard deviation image, and confirm that the 5-sigma
+\item For each combined frame, divide by the standard deviation image, and confirm that the 5-sigma
 clipped standard is 1.0 to within statistical noise (after masking known defects)
-\item for each pixel, check if all master frames are consistent to within statistical noise;
+\item for each pixel, check if all combined frames are consistent to within statistical noise;
 if not, confirm that they are included in the defect map.  Also identify pixels in the
 defect map that are not identified.
 \item Search the pocket-pumped flats for dark pixels.  Confirm that they are all included in
@@ -122,7 +124,7 @@ Note that the choice of N$_{\text{b}}$ must be made to measure the bias frame su
 increase the effective read noise by more than 2.5\%.
 
 The individual frames will be overscan-corrected and trimmed, and then median or 5-sigma clip combined using
-standard LSST image stacking code.  The resulting master bias will then be ingested.
+standard LSST image stacking code.  The resulting combined bias will then be ingested.
 
 Tests:
 \begin{enumerate}
@@ -180,6 +182,7 @@ Tests:
 \begin{enumerate}
 \item Form the function (I$_{\text{1}}$ - I$_{\text{2}}$)/(I$_{\text{1}}$ + I$_{\text{2}}$) whose mean value is 1/gain.  Note
 that this is sensitive to brighter-fatter so bin (or use BF correction code).
+\item Compare the gain estimated from a pair of flat fields to the gain value stored in each amplifier, to monitor any temporal changes. Check that the relative fractional difference is within a threshold (default: 5\%).
 \item Measure the gain values for each amplifier that minimises discontinuities at amp boundaries.
 \end{enumerate}
 
@@ -277,9 +280,9 @@ processing. Cross-talk correction should be included for the final, all-amplifie
 
 Tests:
 \begin{enumerate}
-\item Fit the amplitude of each cross-talk image to the image of the "aggressor" spot, resulting in an 3024x3024
+\item Fit the amplitude of each cross-talk image to the image of the "source" spot, resulting in an 3024x3024
 matrix (16*189).  If appropriate, a 16x16 matrix may be sufficient.  Compare with the numbers provided by
-the camera team
+the camera team.
 \item Using the all-amp-spots image, mask the direct spots, and confirm that the median and 5-sigma clipped means
 are equal to within statistical error.
 \begin{itemize}
