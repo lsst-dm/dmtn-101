@@ -11,7 +11,7 @@
 \title{Verifying LSST Calibration Data Products}
 
 \author{%
-Robert Lupton the Good
+Robert Lupton the Good, Andrés A. Plazas Malagón, and Christopher Waters
 }
 
 \setDocRef{DMTN-101}
@@ -31,7 +31,7 @@ A description of plans for verifying LSST's Calibration Data Products. This docu
   \addtohist{1.1}{2022-08-05}{Added PTC section}{Andrés A. Plazas Malagón}
   \addtohist{1.2}{2022-09-27}{Added gain test: 6.2}{Andrés A. Plazas Malagón}
   \addtohist{1.2.0}{2022-09-27}{Replaced ``master" with ``combined" and ``aggressor" with ``source".}{Andrés A. Plazas Malagón}
-  \addtohist{1.3}{Added subsection on linearizer test}{Andrés A. Plazas Malagón}
+  \addtohist{1.3}{2023-02-21}{Added subsection on linearizer test}{Andrés A. Plazas Malagón}
 }
 
 \begin{document}
@@ -227,7 +227,7 @@ linearised.
 
 Test:
 \begin{enumerate}
-	\item Given a test linearizer of a certain type (\empg{e.g.}, Spline, Quadratic, Polynomial, or Lookup Table) created with the Calibration Products Production pipelines, a Photon Transfer Curve should be created with data that has undergone Instrument Signature Removal using this input linearizer. Then, a second linearizer should be produced using this PTC data. Linearity residuals of this second linearizer should be less than a predetermined threshold, depending on the linearizer type:
+	\item Given a test linearizer of a certain type (\emph{e.g.}, Spline, Quadratic, Polynomial, or Lookup Table) created with the Calibration Products Production pipelines, a Photon Transfer Curve should be created with data that has undergone Instrument Signature Removal using this input linearizer. Then, a second linearizer should be produced using this PTC data. Linearity residuals of this second linearizer should be less than a predetermined threshold, depending on the linearizer type:
 		\begin{enumerate}
 			\item Spline linearizer: the maximum of the absolute value of the spline residuals should be less than a nominal threshold (default: 1\%).
 			\item Quadratic linearizer: the quadratric non-linearity coefficient, $c_0$, should be less than a nominal threshold (default: $1e^{-6}$).
