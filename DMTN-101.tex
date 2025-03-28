@@ -46,10 +46,17 @@ A description of plans for verifying LSST's Calibration Data Products. This docu
 
 \renewcommand{\secRef}[1]{Sec. \ref{#1}}
 \section{Text from LVV-57}
-Specification: The DMS shall produce and archive Calibration Data Products that capture the signature of the
+
+(DMS-REQ-0130 \citedsp{LSE-61})
+
+\textbf{Specification}:
+
+The DMS shall produce and archive Calibration Data Products that capture the signature of the
 telescope, camera and detector, including at least: Crosstalk correction matrix, Bias and Dark correction
 frames, a set of monochromatic dome flats spanning the wavelength range, a synthetic broad-band flat per
-filter, and an illumination correction frame per filter.  Description
+filter, and an illumination correction frame per filter.
+
+\textbf{Description}:
 
 For every calibration mode, prove that the data can be processed. Can be done with simulated data and that
 from the auxiliary telescope. Will need to be redone with real LSST camera data.
