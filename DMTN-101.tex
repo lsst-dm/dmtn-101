@@ -11,7 +11,10 @@
 \title{Verifying LSST Calibration Data Products}
 
 \author{%
-Robert Lupton the Good, Andrés A. Plazas Malagón, and Christopher Waters
+Robert Lupton,
+Andrés A. Plazas Malagón,
+and
+Christopher Waters
 }
 
 \setDocRef{DMTN-101}
@@ -43,10 +46,17 @@ A description of plans for verifying LSST's Calibration Data Products. This docu
 
 \renewcommand{\secRef}[1]{Sec. \ref{#1}}
 \section{Text from LVV-57}
-Specification: The DMS shall produce and archive Calibration Data Products that capture the signature of the
+
+(DMS-REQ-0130 \citedsp{LSE-61})
+
+\textbf{Specification}:
+
+The DMS shall produce and archive Calibration Data Products that capture the signature of the
 telescope, camera and detector, including at least: Crosstalk correction matrix, Bias and Dark correction
 frames, a set of monochromatic dome flats spanning the wavelength range, a synthetic broad-band flat per
-filter, and an illumination correction frame per filter.  Description
+filter, and an illumination correction frame per filter.
+
+\textbf{Description}:
 
 For every calibration mode, prove that the data can be processed. Can be done with simulated data and that
 from the auxiliary telescope. Will need to be redone with real LSST camera data.
@@ -61,14 +71,14 @@ appropriate data), and repeated with auxTel, lsstCam on the CCOB (when appropria
 on the 8.4m telescope (if that happens), and then lsstCam on the 8.4m telescope.
 
 \begin{itemize}
-\item When "flats" are called for, unless otherwise noted, they should be taken using a stable c. 600-700nm
-broad-band light source (monochromatic is acceptable, but will require longer integrations. The illumination
+\item When "flats" are called for, unless otherwise noted, they should be taken using a stable c.\ 600-700nm
+broad-band light source (monochromatic is acceptable, but will require longer integrations). The illumination
 should be reasonably uniform; this means that it would be preferable to take the data with no filter in the
 beam, or with the wavelength chosen to be near a filter's central wavelength.
 
-\item I have not specified whether these calibration products should be produced for corner rafts as well as
+\item I have not specified whether these calibration products should be produced for corner rafts as well as science rafts.
 \end{itemize}
-science rafts.
+
 
 \begin{itemize}
 \item Depending on our final model for how the image is modified by the detector and REB, we may choose to use a
@@ -80,7 +90,7 @@ be changed from an algorithmic description to a V\&V plan.
 
 \section{Defect Maps}
 
-We expect the camera team to deliver a list of bad (i.e. ones that are unusable) and suspect (i.e.
+We expect the camera team to deliver a list of bad (i.e., ones that are unusable) and suspect (i.e.,
 ones that should raise a flag during processing) pixels.
 
 The bad pixels should be ignored in all the tests which I describe below.
@@ -89,7 +99,7 @@ Once all the calibration products described below are validated, we will check f
 the defect maps.
 
 Take a set of dome flat fields at a set of logarithmically spaced intensity
-levels starting at 500 DN and increasing by a factor of 2 (i.e. 500, 1000, 2000, \ldots{}); at least 5 exposures
+levels starting at 500 DN and increasing by a factor of 2 (i.e., 500, 1000, 2000, \ldots{}); at least 5 exposures
 must be taken at all levels.  The exact levels are not important, and need not be accurately known.  A
 sufficient number of exposures at each level must be taken to measure the mean flux with 0.5\% errors (except
 that a maximum of 20 exposures per level is required; this is only sufficient to measure the 500-count flux to
@@ -193,7 +203,7 @@ We expect the camera team to deliver non-linearity curves for every amplifier, a
 these non-linearity curves may be unreliable.
 
 Take a set of flat fields at a set of logarithmically spaced intensity levels starting at 500 DN and
-increasing by a factor of 2 (i.e. 500, 1000, 2000, \ldots{}).  The exact levels are not important, but they must be
+increasing by a factor of 2 (i.e., 500, 1000, 2000, \ldots{}).  The exact levels are not important, but they must be
 well known; both the flux level and shutter time must be well measured.  If necessary, we can open the shutter
 in the dark, turn on the light source, turn it off, and then close the shutter.  N.b. It may be necessary to
 modify or augment this set of intensity levels to successfully carry out the specified tests.
@@ -201,7 +211,7 @@ modify or augment this set of intensity levels to successfully carry out the spe
 An alternative dataset it taken by opening the shutter, and using the CBP with a mask with reasonably large
 holes to produce spots on the focal plane at the same set of intensity levels as above, with at least one
 spot on every amplifier.  After every exposure, the parallels on the CCD must be run to transfer enough rows
-that the successive spots do not overlap.  The sequence shuld be repeated with the spots moved to different points on the
+that the successive spots do not overlap.  The sequence should be repeated with the spots moved to different points on the
 amplifier.  If necessary, this test can be carried out using masks with fewer holes by repeating the scans
 with the CBP rotated about its pupil to move the spots.
 
@@ -234,7 +244,7 @@ Test:
 			\item Polynomial linearizer: the quadratic term should be less than a nominal threshold, as in the Quadratic linearizer case, and the higher order polynomial terms should be less than an array of nominal thresholds scaled by the quadratic term threshold.
 			\item Lookup Table: the maximum of the absolute value of the linearizer residuals (defined as the ratio of the corrections provided by the table and the flux level for each correction) should be less than a nominal threshold (default: 1\%).
 		\end{enumerate}
- 
+
 \end{enumerate}
 
 
@@ -242,12 +252,12 @@ Test:
 
 We expect the camera team to provide, for each amplifier, the lowest charge level at which charge moves from
 one pixel to a neighbour.  If necessary, they will also provide the level at which the serial register
-saturates (i.e. if the serial saturates at a lower level than the parallels). Note that this is not
+saturates (i.e., if the serial saturates at a lower level than the parallels). Note that this is not
 the "saturation level" that the EOTest suite currently measures.
 
 Take a set of exposures using the CBP with a mask with small holes to produce spots on the focal plane with
 peak flux levels at a set of linearly spaced intensity levels starting at c. 50000 DN and increasing by
-c. 1000 DN (i.e. 50000, 51000, 52000, \ldots{}). The exact levels are not important. When we know the devices'
+c. 1000 DN (i.e., 50000, 51000, 52000, \ldots{}). The exact levels are not important. When we know the devices'
 saturation levels we may be able to use a smaller set of levels.  There should be a spot projected on every
 amplifier.  If convenient, the parallels on the CCD may be run to transfer enough rows that the successive
 spots do not overlap to reduce the total data volume.
@@ -269,7 +279,7 @@ distance from the centre of the spot.  Allowing for spill-over into the neighbou
 bottom of the trail, find the lowest level present in bleed trails for each amplifier.  Compare with
 the saturation levels for each amplifier determined above.
 \item Repeat this analysis on real saturated star images when available.
-\item Examine the levels of pixels to the left and right of bleed trails (i.e. in parallel to the serial
+\item Examine the levels of pixels to the left and right of bleed trails (i.e., in parallel to the serial
 register) for signs of saturation in the serial register.
 \end{enumerate}
 
@@ -285,7 +295,7 @@ crosstalk present; e.g. just one; one or a few per CCD; one per amplifier.  The 
 until a spot has been placed upon every amplifier in the camera.
 
 For a selected set of amplifiers, take the spot data at a set of logarithmically spaced intensity levels
-starting at 500 DN and increasing by a factor of 2 (i.e. 500, 1000, 2000, \ldots{}).  The exact levels are not
+starting at 500 DN and increasing by a factor of 2 (i.e., 500, 1000, 2000, \ldots{}).  The exact levels are not
 important.  Depending on the spot areas, and cross-talk coefficients, it may be necessary to take multiple
 exposures at the same intensity level to measure the coefficients with an accuracy sufficient to enable
 cross-talk correction without adding noise.
@@ -556,16 +566,16 @@ Write me
 
 
 \section{Photon Transfer Curve}
-The Photon Transfer Curve (PTC) of a CCD plots the variance of a seriees of images taken under uniform illumination (``flat fields``) as a function of their average. It allows for the calculation of fundamental CCD parameters such as the gain (electrons per ADU), the readout noise, and the mean pixel full well via the PTC turnoff. As such, it plays an important role in the characterization and monitoring of the state of a detector. 
+The Photon Transfer Curve (PTC) of a CCD plots the variance of a seriees of images taken under uniform illumination (``flat fields``) as a function of their average. It allows for the calculation of fundamental CCD parameters such as the gain (electrons per ADU), the readout noise, and the mean pixel full well via the PTC turnoff. As such, it plays an important role in the characterization and monitoring of the state of a detector.
 
-It has been established that the variance flattens out at high fluxes and it is not perfectly proportional to the average flux, as Poissonian statistics would dictate. This is related to the ``Brighter-fatter`` (BFE) effect and increases the correlations between adjacent pixels, decaying with distance, as reported in e.g., Astier et al. 2019. This study proposes a couple of models to fit to the PTC data (including covariances) with a leading order parameter $a00$ to take the BFE into account. This parameter should be negative (as it describes the change in a pixel area due to its own charge content), is purely electrostatic in nature, and should not change during the life of a given CCD unless operating voltages such as the bias voltage are changed.  
+It has been established that the variance flattens out at high fluxes and it is not perfectly proportional to the average flux, as Poissonian statistics would dictate. This is related to the ``Brighter-fatter`` (BFE) effect and increases the correlations between adjacent pixels, decaying with distance, as reported in e.g., Astier et al. 2019. This study proposes a couple of models to fit to the PTC data (including covariances) with a leading order parameter $a00$ to take the BFE into account. This parameter should be negative (as it describes the change in a pixel area due to its own charge content), is purely electrostatic in nature, and should not change during the life of a given CCD unless operating voltages such as the bias voltage are changed.
 
-Tests: 
+Tests:
 \begin{enumerate}
 \item Compare the fitted gain to the gain value stored in each amplifier, to monitor any temporal changes. Check that the relative fractional difference is within a threshold (default: 5\%).
 \item Compare the fitted readout noise to the readout noise value stored in each amplifier, to monitor any temporal changes. Check that the relative fractional difference is within a threshold (default: 5\%).
 \item Check that the reported PTC turnoff value (converted to electrons) is greater or equal than the full-well requirement (90000 electrons).
-\item Check that the brigther-fatter effect parameter from the Astier et al. 2019 models, $a00$, is within a range determined by measurements of the distribution of this parameter (e.g., within five sigma of the mean of the coefficientis distribution for a given instrument, detector, and fit type).  
+\item Check that the brigther-fatter effect parameter from the Astier et al. 2019 models, $a00$, is within a range determined by measurements of the distribution of this parameter (e.g., within five sigma of the mean of the coefficientis distribution for a given instrument, detector, and fit type).
 \end{enumerate}
 
 \appendix
