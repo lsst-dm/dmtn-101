@@ -10,14 +10,10 @@
 
 \title{Verifying LSST Calibration Data Products}
 
-\author{%
-Robert Lupton,
-Andrés A. Plazas Malagón,
-and
-Christopher Waters
-}
+\input{authors}
 
 \setDocRef{DMTN-101}
+\setDocDOI{10.71929/rubin/2586569}
 
 \date{\vcsDate}
 
@@ -67,8 +63,8 @@ In some cases the data taken for one purpose may be reused for another, but I ha
 capture this here.
 
 The tests will be developed using TS8 data where possible (in some cases the camera team may not have taken
-appropriate data), and repeated with auxTel, lsstCam on the CCOB (when appropriate data is available), comCam
-on the 8.4m telescope (if that happens), and then lsstCam on the 8.4m telescope.
+appropriate data), and repeated with LATISS \citep{10.71929/rubin/2571930} on AuxTel, LSSTCam \citep{10.71929/rubin/2571927} on the CCOB (when appropriate data is available), LSSTComCam \citep{10.71929/rubin/2561361}
+on the 8.4m telescope (if that happens), and then LSSTCam on the 8.4m telescope.
 
 \begin{itemize}
 \item When "flats" are called for, unless otherwise noted, they should be taken using a stable c.\ 600-700nm
@@ -321,7 +317,7 @@ will need to take a set of images with fewer spots.
 \end{enumerate}
 
 We can can also check the cross talk coefficients using saturated stars' bleed
-trails or cosmic rays\citep{2012PASP..124.1347Y}.
+trails or cosmic rays \citep{2012PASP..124.1347Y}.
 
 \section{WRITE ME Flat Fields}
 
@@ -568,20 +564,26 @@ Write me
 \section{Photon Transfer Curve}
 The Photon Transfer Curve (PTC) of a CCD plots the variance of a seriees of images taken under uniform illumination (``flat fields``) as a function of their average. It allows for the calculation of fundamental CCD parameters such as the gain (electrons per ADU), the readout noise, and the mean pixel full well via the PTC turnoff. As such, it plays an important role in the characterization and monitoring of the state of a detector.
 
-It has been established that the variance flattens out at high fluxes and it is not perfectly proportional to the average flux, as Poissonian statistics would dictate. This is related to the ``Brighter-fatter`` (BFE) effect and increases the correlations between adjacent pixels, decaying with distance, as reported in e.g., Astier et al. 2019. This study proposes a couple of models to fit to the PTC data (including covariances) with a leading order parameter $a00$ to take the BFE into account. This parameter should be negative (as it describes the change in a pixel area due to its own charge content), is purely electrostatic in nature, and should not change during the life of a given CCD unless operating voltages such as the bias voltage are changed.
+It has been established that the variance flattens out at high fluxes and it is not perfectly proportional to the average flux, as Poissonian statistics would dictate. This is related to the ``Brighter-fatter`` (BFE) effect and increases the correlations between adjacent pixels, decaying with distance, as reported in e.g., \citet{2019A&A...629A..36A}. This study proposes a couple of models to fit to the PTC data (including covariances) with a leading order parameter $a00$ to take the BFE into account. This parameter should be negative (as it describes the change in a pixel area due to its own charge content), is purely electrostatic in nature, and should not change during the life of a given CCD unless operating voltages such as the bias voltage are changed.
 
 Tests:
 \begin{enumerate}
 \item Compare the fitted gain to the gain value stored in each amplifier, to monitor any temporal changes. Check that the relative fractional difference is within a threshold (default: 5\%).
 \item Compare the fitted readout noise to the readout noise value stored in each amplifier, to monitor any temporal changes. Check that the relative fractional difference is within a threshold (default: 5\%).
 \item Check that the reported PTC turnoff value (converted to electrons) is greater or equal than the full-well requirement (90000 electrons).
-\item Check that the brigther-fatter effect parameter from the Astier et al. 2019 models, $a00$, is within a range determined by measurements of the distribution of this parameter (e.g., within five sigma of the mean of the coefficientis distribution for a given instrument, detector, and fit type).
+\item Check that the brigther-fatter effect parameter from the \citet{2019A&A...629A..36A} models, $a00$, is within a range determined by measurements of the distribution of this parameter (e.g., within five sigma of the mean of the coefficientis distribution for a given instrument, detector, and fit type).
 \end{enumerate}
 
 \appendix
 
-\section{References}
-\label{sec:bib}
-\bibliography{lsst,lsst-dm,refs_ads,refs,books}
+% Include all the relevant bib files.
+% https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
+\section{References} \label{sec:bib}
+\renewcommand{\refname}{} % Suppress default Bibliography section
+\bibliography{local,lsst,lsst-dm,refs_ads,refs,books}
+
+% Make sure lsst-texmf/bin/generateAcronyms.py is in your path
+\section{Acronyms} \label{sec:acronyms}
+\input{acronyms}
 
 \end{document}

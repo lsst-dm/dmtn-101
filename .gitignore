@@ -3,6 +3,7 @@ DMTN-101.pdf
 
 one.*
 ## Core latex/pdflatex auxiliary files:
+*.xdv
 *.aux
 *.lof
 *.log
@@ -15,7 +16,8 @@ one.*
 *.cb
 *.cb2
 meta.tex
-
+authors.tex
+acronyms.tex
 
 ## Intermediate documents:
 *.dvi
